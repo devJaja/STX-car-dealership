@@ -3,3 +3,6 @@ settings/Devnet.toml
 .DS_Store
 node_modules/
 deployments/
+*.log
+dist/
+.env
