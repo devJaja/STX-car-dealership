@@ -48,7 +48,13 @@ curl -L https://github.com/hirosystems/clarinet/releases/download/v2.0.0/clarine
 sudo mv clarinet /usr/local/bin/
 ```
 
-### 2. Deploy Smart Contract
+### 2. Test Contracts
+
+```bash
+clarinet test
+```
+
+### 3. Deploy Smart Contract
 
 ```bash
 cd contracts
