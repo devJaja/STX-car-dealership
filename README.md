@@ -69,7 +69,7 @@ After deployment, update the contract address in:
 - `frontend/src/components/AddCar.jsx`
 - `frontend/src/components/CarList.jsx`
 
-Replace `ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM` with your deployed contract address.
+Replace the placeholder contract address with your deployed contract address.
 
 ### 4. Run Frontend
 
