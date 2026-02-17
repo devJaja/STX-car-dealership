@@ -91,9 +91,9 @@ Open http://localhost:5173
 
 - **Blockchain**: Stacks (Bitcoin Layer 2)
 - **Smart Contract**: Clarity
-- **Frontend**: React + Vite
+- **Frontend**: React 18 + Vite
 - **Styling**: Tailwind CSS
-- **Wallet**: Stacks Connect (@stacks/connect)
+- **Wallet Integration**: Stacks Connect (@stacks/connect)
 
 ## Contract Functions
 
