@@ -1,0 +1,6 @@
+[project]
+name = "car-dealership"
+description = "Car dealership dApp on Stacks"
+
+[contracts.car-dealership]
+path = "car-dealership.clar"
