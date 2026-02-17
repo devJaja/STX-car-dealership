@@ -7,5 +7,11 @@ telemetry = false
 [contracts.car-dealership]
 path = "contracts/car-dealership.clar"
 
+[contracts.car-token]
+path = "contracts/car-token.clar"
+
+[contracts.car-nft]
+path = "contracts/car-nft.clar"
+
 [repl.analysis]
 passes = ["check_checker"]
