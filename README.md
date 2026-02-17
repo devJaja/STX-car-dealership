@@ -112,3 +112,10 @@ Open http://localhost:5173
 ### Read-Only Functions
 - `get-car` - Get car details
 - `get-total-cars` - Get total number of cars
+
+## Additional Contracts
+
+- **Car Token (CDT)**: Fungible token for the ecosystem
+- **Car NFT**: Non-fungible tokens representing car ownership
+
+See [TOKEN_NFT.md](TOKEN_NFT.md) for details.
