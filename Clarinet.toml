@@ -1,0 +1,11 @@
+[project]
+name = "car-dealership"
+description = "Car dealership dApp on Stacks"
+authors = []
+telemetry = false
+
+[contracts.car-dealership]
+path = "contracts/car-dealership.clar"
+
+[repl.analysis]
+passes = ["check_checker"]
