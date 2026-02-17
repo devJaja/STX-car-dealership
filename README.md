@@ -83,7 +83,7 @@ Open http://localhost:5173
 ## Usage
 
 1. **Connect Wallet**: Click "Connect Wallet" and use Hiro Wallet or Leather
-2. **Add Car**: Owner can add cars with make, model, year, and price
+2. **Add Car**: Owner can add cars with make, model, year, and price (in microSTX)
 3. **Buy Car**: Users can purchase cars listed for sale
 4. **List/Unlist**: Owners can list or unlist their cars
 
