@@ -6,3 +6,4 @@ deployments/
 *.log
 dist/
 .env
+.clarinet/
