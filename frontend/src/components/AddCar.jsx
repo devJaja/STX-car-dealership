@@ -14,7 +14,7 @@ function AddCar({ userData, userSession, onCarAdded }) {
 
     await openContractCall({
       network: new StacksTestnet(),
-      contractAddress: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+      contractAddress: 'YOUR_CONTRACT_ADDRESS',
       contractName: 'car-dealership',
       functionName: 'add-car',
       functionArgs: [

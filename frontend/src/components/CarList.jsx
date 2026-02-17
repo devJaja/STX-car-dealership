@@ -6,7 +6,7 @@ function CarList({ cars, userData, userSession, onUpdate }) {
   const buyCar = async (carId) => {
     await openContractCall({
       network: new StacksTestnet(),
-      contractAddress: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+      contractAddress: 'YOUR_CONTRACT_ADDRESS',
       contractName: 'car-dealership',
       functionName: 'buy-car',
       functionArgs: [uintCV(carId)],
@@ -24,7 +24,7 @@ function CarList({ cars, userData, userSession, onUpdate }) {
 
     await openContractCall({
       network: new StacksTestnet(),
-      contractAddress: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+      contractAddress: 'YOUR_CONTRACT_ADDRESS',
       contractName: 'car-dealership',
       functionName: 'list-car',
       functionArgs: [uintCV(carId), uintCV(newPrice)],
@@ -39,7 +39,7 @@ function CarList({ cars, userData, userSession, onUpdate }) {
   const unlistCar = async (carId) => {
     await openContractCall({
       network: new StacksTestnet(),
-      contractAddress: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+      contractAddress: 'YOUR_CONTRACT_ADDRESS',
       contractName: 'car-dealership',
       functionName: 'unlist-car',
       functionArgs: [uintCV(carId)],
