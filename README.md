@@ -36,10 +36,11 @@ car-dealership/
 
 ## Smart Contract Features
 
-- Add cars to inventory (owner only)
-- Buy cars with STX tokens
-- List/unlist cars for sale
-- View car details
+- **Car Dealership**: Add, buy, list, and unlist cars
+- **Fungible Token (CDT)**: Mint and transfer tokens
+- **NFT**: Create car ownership certificates with metadata
+- **Access Control**: Owner-only functions for sensitive operations
+- **STX Payments**: Native STX token integration for purchases
 
 ## Setup Instructions
 
