@@ -5,6 +5,8 @@ import { callReadOnlyFunction, uintCV, stringAsciiCV } from '@stacks/transaction
 import Header from './components/Header'
 import AddCar from './components/AddCar'
 import CarList from './components/CarList'
+import TokenManager from './components/TokenManager'
+import NFTManager from './components/NFTManager'
 
 const appConfig = new AppConfig(['store_write', 'publish_data'])
 const userSession = new UserSession({ appConfig })
@@ -112,11 +114,23 @@ function App() {
         />
         
         {userData && (
-          <AddCar 
-            userData={userData}
-            userSession={userSession}
-            onCarAdded={loadCars}
-          />
+          <>
+            <AddCar 
+              userData={userData}
+              userSession={userSession}
+              onCarAdded={loadCars}
+            />
+            
+            <TokenManager 
+              userData={userData}
+              userSession={userSession}
+            />
+            
+            <NFTManager 
+              userData={userData}
+              userSession={userSession}
+            />
+          </>
         )}
 
         <CarList 
