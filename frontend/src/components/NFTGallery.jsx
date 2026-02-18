@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { callReadOnlyFunction, uintCV, principalCV } from '@stacks/transactions'
+import { uintCV, principalCV } from '@stacks/transactions'
 import * as StacksNetwork from '@stacks/network'
 import { openContractCall } from '@stacks/connect'
 
@@ -15,9 +15,8 @@ function NFTGallery({ userData, userSession }) {
 
   const loadNFTs = async () => {
     try {
-      const network = new StacksNetwork.StacksMainnet()
-      const result = await callReadOnlyFunction({
-        network,
+      const network = StacksNetwork.createNetwork("mainnet")
+      const result = await network.callReadOnlyFunction({
         contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
         contractName: 'car-nft',
         functionName: 'get-last-token-id',
@@ -41,9 +40,8 @@ function NFTGallery({ userData, userSession }) {
 
   const loadNFT = async (tokenId) => {
     try {
-      const network = new StacksNetwork.StacksMainnet()
-      const metadata = await callReadOnlyFunction({
-        network,
+      const network = StacksNetwork.createNetwork("mainnet")
+      const metadata = await network.callReadOnlyFunction({
         contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
         contractName: 'car-nft',
         functionName: 'get-metadata',
@@ -51,8 +49,7 @@ function NFTGallery({ userData, userSession }) {
         senderAddress: userData?.profile?.stxAddress?.mainnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       })
 
-      const owner = await callReadOnlyFunction({
-        network,
+      const owner = await network.callReadOnlyFunction({
         contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
         contractName: 'car-nft',
         functionName: 'get-owner',
@@ -86,7 +83,7 @@ function NFTGallery({ userData, userSession }) {
     if (!recipient) return
 
     await openContractCall({
-      network: new StacksNetwork.StacksMainnet(),
+      network: StacksNetwork.createNetwork("mainnet"),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-nft',
       functionName: 'transfer',

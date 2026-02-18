@@ -20,7 +20,7 @@ function NFTManager({ userData, userSession }) {
   const mintNFT = async (e) => {
     e.preventDefault()
     await openContractCall({
-      network: new StacksNetwork.StacksMainnet(),
+      network: StacksNetwork.createNetwork("mainnet"),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-nft',
       functionName: 'mint',

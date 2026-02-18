@@ -13,7 +13,7 @@ function AddCar({ userData, userSession, onCarAdded }) {
     e.preventDefault()
 
     await openContractCall({
-      network: new StacksNetwork.StacksMainnet(),
+      network: StacksNetwork.createNetwork("mainnet"),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-dealership',
       functionName: 'add-car',
