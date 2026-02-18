@@ -102,6 +102,9 @@ Open http://localhost:5173
 2. **Add Car**: Owner can add cars with make, model, year, and price (in microSTX)
 3. **Buy Car**: Users can purchase cars listed for sale
 4. **List/Unlist**: Owners can list or unlist their cars
+5. **Mint Tokens**: Create CDT tokens for the ecosystem
+6. **Create NFTs**: Mint car ownership certificates
+7. **Transfer NFTs**: Send NFTs to other users
 
 ## Tech Stack
 
