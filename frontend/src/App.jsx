@@ -53,11 +53,11 @@ function App() {
       const network = new StacksTestnet()
       const result = await callReadOnlyFunction({
         network,
-        contractAddress: 'YOUR_CONTRACT_ADDRESS',
+        contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
         contractName: 'car-dealership',
         functionName: 'get-total-cars',
         functionArgs: [],
-        senderAddress: userData?.profile?.stxAddress?.testnet || 'YOUR_CONTRACT_ADDRESS',
+        senderAddress: userData?.profile?.stxAddress?.testnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       })
       
       const total = parseInt(result.value)
@@ -79,11 +79,11 @@ function App() {
       const network = new StacksTestnet()
       const result = await callReadOnlyFunction({
         network,
-        contractAddress: 'YOUR_CONTRACT_ADDRESS',
+        contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
         contractName: 'car-dealership',
         functionName: 'get-car',
         functionArgs: [uintCV(carId)],
-        senderAddress: userData?.profile?.stxAddress?.testnet || 'YOUR_CONTRACT_ADDRESS',
+        senderAddress: userData?.profile?.stxAddress?.testnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       })
 
       if (result.type === 'some') {

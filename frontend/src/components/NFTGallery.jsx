@@ -18,11 +18,11 @@ function NFTGallery({ userData, userSession }) {
       const network = new StacksTestnet()
       const result = await callReadOnlyFunction({
         network,
-        contractAddress: 'YOUR_CONTRACT_ADDRESS',
+        contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
         contractName: 'car-nft',
         functionName: 'get-last-token-id',
         functionArgs: [],
-        senderAddress: userData?.profile?.stxAddress?.testnet || 'YOUR_CONTRACT_ADDRESS',
+        senderAddress: userData?.profile?.stxAddress?.testnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       })
 
       const total = parseInt(result.value)
@@ -44,20 +44,20 @@ function NFTGallery({ userData, userSession }) {
       const network = new StacksTestnet()
       const metadata = await callReadOnlyFunction({
         network,
-        contractAddress: 'YOUR_CONTRACT_ADDRESS',
+        contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
         contractName: 'car-nft',
         functionName: 'get-metadata',
         functionArgs: [uintCV(tokenId)],
-        senderAddress: userData?.profile?.stxAddress?.testnet || 'YOUR_CONTRACT_ADDRESS',
+        senderAddress: userData?.profile?.stxAddress?.testnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       })
 
       const owner = await callReadOnlyFunction({
         network,
-        contractAddress: 'YOUR_CONTRACT_ADDRESS',
+        contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
         contractName: 'car-nft',
         functionName: 'get-owner',
         functionArgs: [uintCV(tokenId)],
-        senderAddress: userData?.profile?.stxAddress?.testnet || 'YOUR_CONTRACT_ADDRESS',
+        senderAddress: userData?.profile?.stxAddress?.testnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       })
 
       if (metadata.type === 'ok' && metadata.value.type === 'some') {
@@ -87,7 +87,7 @@ function NFTGallery({ userData, userSession }) {
 
     await openContractCall({
       network: new StacksTestnet(),
-      contractAddress: 'YOUR_CONTRACT_ADDRESS',
+      contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-nft',
       functionName: 'transfer',
       functionArgs: [

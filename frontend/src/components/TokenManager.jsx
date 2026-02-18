@@ -12,7 +12,7 @@ function TokenManager({ userData, userSession }) {
     e.preventDefault()
     await openContractCall({
       network: new StacksTestnet(),
-      contractAddress: 'YOUR_CONTRACT_ADDRESS',
+      contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-token',
       functionName: 'mint',
       functionArgs: [uintCV(mintAmount), principalCV(recipient)],
@@ -27,7 +27,7 @@ function TokenManager({ userData, userSession }) {
 
   const checkBalance = async () => {
     const response = await fetch(
-      `https://api.testnet.hiro.so/v2/contracts/call-read/YOUR_CONTRACT_ADDRESS/car-token/get-balance`,
+      `https://api.testnet.hiro.so/v2/contracts/call-read/SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC/car-token/get-balance`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

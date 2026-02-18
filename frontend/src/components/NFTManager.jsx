@@ -21,7 +21,7 @@ function NFTManager({ userData, userSession }) {
     e.preventDefault()
     await openContractCall({
       network: new StacksTestnet(),
-      contractAddress: 'YOUR_CONTRACT_ADDRESS',
+      contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-nft',
       functionName: 'mint',
       functionArgs: [
