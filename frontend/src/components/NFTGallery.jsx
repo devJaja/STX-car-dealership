@@ -1,44 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { uintCV, principalCV } from '@stacks/transactions'
 import * as StacksNetwork from '@stacks/network'
 import { openContractCall } from '@stacks/connect'
 
 function NFTGallery({ userData, userSession }) {
   const [nfts, setNfts] = useState([])
-  const [totalNFTs, setTotalNFTs] = useState(0)
 
-  useEffect(() => {
-    if (userData) {
-      loadNFTs()
-    }
-  }, [userData])
-
-  const loadNFTs = async () => {
-    try {
-      const network = StacksNetwork.createNetwork("mainnet")
-      const result = await network.callReadOnlyFunction({
-        contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
-        contractName: 'car-nft',
-        functionName: 'get-last-token-id',
-        functionArgs: [],
-        senderAddress: userData?.profile?.stxAddress?.mainnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
-      })
-
-      const total = parseInt(result.value)
-      setTotalNFTs(total)
-
-      const nftPromises = []
-      for (let i = 0; i < total; i++) {
-        nftPromises.push(loadNFT(i))
-      }
-      const loadedNFTs = await Promise.all(nftPromises)
-      setNfts(loadedNFTs.filter(nft => nft !== null))
-    } catch (error) {
-      console.error('Error loading NFTs:', error)
-    }
-  }
-
-  const loadNFT = async (tokenId) => {
+  const loadNFT = useCallback(async (tokenId) => {
     try {
       const network = StacksNetwork.createNetwork("mainnet")
       const metadata = await network.callReadOnlyFunction({
@@ -76,7 +44,37 @@ function NFTGallery({ userData, userSession }) {
       console.error(`Error loading NFT ${tokenId}:`, error)
       return null
     }
-  }
+  }, [userData])
+
+  const loadNFTs = useCallback(async () => {
+    try {
+      const network = StacksNetwork.createNetwork("mainnet")
+      const result = await network.callReadOnlyFunction({
+        contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
+        contractName: 'car-nft',
+        functionName: 'get-last-token-id',
+        functionArgs: [],
+        senderAddress: userData?.profile?.stxAddress?.mainnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
+      })
+
+      const total = parseInt(result.value)
+
+      const nftPromises = []
+      for (let i = 0; i < total; i++) {
+        nftPromises.push(loadNFT(i))
+      }
+      const loadedNFTs = await Promise.all(nftPromises)
+      setNfts(loadedNFTs.filter(nft => nft !== null))
+    } catch (error) {
+      console.error('Error loading NFTs:', error)
+    }
+  }, [userData, loadNFT])
+
+  useEffect(() => {
+    if (userData) {
+      loadNFTs()
+    }
+  }, [userData, loadNFTs])
 
   const transferNFT = async (tokenId) => {
     const recipient = prompt('Enter recipient address:')
@@ -101,35 +99,49 @@ function NFTGallery({ userData, userSession }) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">🎨 NFT Gallery</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-lg p-6 border border-gray-100 dark:border-gray-700">
+      <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">🎨 NFT Gallery</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {nfts.length === 0 ? (
-          <p className="text-gray-500 col-span-full text-center py-8">No NFTs minted yet</p>
+          <div className="col-span-full py-12 text-center text-gray-500">
+            <p>No digital assets found in your connected wallet.</p>
+          </div>
         ) : (
           nfts.map((nft) => (
-            <div key={nft.id} className="border border-gray-200 rounded-lg p-4 bg-gradient-to-br from-purple-50 to-indigo-50">
-              <div className="bg-white rounded-lg p-4 mb-3">
-                <h3 className="text-xl font-bold text-purple-600 mb-2">
+            <div key={nft.id} className="bg-dark-900 rounded-xl overflow-hidden border border-gray-800 shadow-xl flex flex-col group">
+              <div className="p-4 bg-gradient-to-r from-dark-800 to-dark-900 border-b border-gray-800 flex justify-between items-center">
+                <span className="text-gray-400 font-mono text-xs">#{nft.id}</span>
+                <div className="h-2 w-2 rounded-full bg-green-500"></div>
+              </div>
+
+              <div className="p-6 flex-grow">
+                <h3 className="text-xl font-bold text-white mb-1">
                   {nft.make} {nft.model}
                 </h3>
-                <p className="text-gray-600">Year: {nft.year}</p>
-                <p className="text-gray-600 text-sm">VIN: {nft.vin}</p>
-                <p className="text-xs text-gray-500 mt-2 break-all">Token ID: #{nft.id}</p>
-              </div>
-              
-              <p className="text-xs text-gray-500 mb-3">
-                Owner: {nft.owner?.slice(0, 8)}...
-              </p>
+                <p className="text-gray-400 text-sm mb-4">{nft.year}</p>
 
-              {userData && nft.owner === userData.profile.stxAddress.mainnet && (
-                <button
-                  onClick={() => transferNFT(nft.id)}
-                  className="w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
-                >
-                  Transfer NFT
-                </button>
-              )}
+                <div className="space-y-2 mb-6">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-500">VIN</span>
+                    <span className="text-gray-300 font-mono">{nft.vin}</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span className="text-gray-500">Owner</span>
+                    <span className="text-gray-300 font-mono" title={nft.owner}>{nft.owner?.slice(0, 6)}...{nft.owner?.slice(-4)}</span>
+                  </div>
+                </div>
+
+                {userData && nft.owner === userData.profile.stxAddress.mainnet && (
+                  <button
+                    onClick={() => transferNFT(nft.id)}
+                    className="w-full py-2 bg-gray-800 hover:bg-gray-700 text-white text-sm font-medium rounded-lg transition-colors border border-gray-700"
+                  >
+                    Transfer Asset
+                  </button>
+                )}
+              </div>
+
+              <div className="h-1 w-full bg-gradient-to-r from-brand-600 to-accent-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
             </div>
           ))
         )}

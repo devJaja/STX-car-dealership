@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { AppConfig, UserSession, showConnect } from '@stacks/connect'
 import * as StacksNetwork from '@stacks/network'
-import { uintCV, stringAsciiCV } from '@stacks/transactions'
+import { uintCV } from '@stacks/transactions'
 import Header from './components/Header'
 import AddCar from './components/AddCar'
 import CarList from './components/CarList'
 import TokenManager from './components/TokenManager'
 import NFTManager from './components/NFTManager'
 import NFTGallery from './components/NFTGallery'
+import Footer from './components/Footer'
 
 const appConfig = new AppConfig(['store_write', 'publish_data'])
 const userSession = new UserSession({ appConfig })
@@ -15,7 +16,6 @@ const userSession = new UserSession({ appConfig })
 function App() {
   const [userData, setUserData] = useState(null)
   const [cars, setCars] = useState([])
-  const [totalCars, setTotalCars] = useState(0)
 
   useEffect(() => {
     if (userSession.isUserSignedIn()) {
@@ -23,16 +23,10 @@ function App() {
     }
   }, [])
 
-  useEffect(() => {
-    if (userData) {
-      loadCars()
-    }
-  }, [userData])
-
   const connectWallet = () => {
     showConnect({
       appDetails: {
-        name: 'Car Dealership',
+        name: 'LuxeDrive',
         icon: window.location.origin + '/logo.png',
       },
       redirectTo: '/',
@@ -48,32 +42,7 @@ function App() {
     setUserData(null)
   }
 
-  const loadCars = async () => {
-    try {
-      const network = StacksNetwork.createNetwork("mainnet")
-      const result = await network.callReadOnlyFunction({
-        contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
-        contractName: 'car-dealership',
-        functionName: 'get-total-cars',
-        functionArgs: [],
-        senderAddress: userData?.profile?.stxAddress?.mainnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
-      })
-      
-      const total = parseInt(result.value)
-      setTotalCars(total)
-      
-      const carPromises = []
-      for (let i = 0; i < total; i++) {
-        carPromises.push(loadCar(i))
-      }
-      const loadedCars = await Promise.all(carPromises)
-      setCars(loadedCars.filter(car => car !== null))
-    } catch (error) {
-      console.error('Error loading cars:', error)
-    }
-  }
-
-  const loadCar = async (carId) => {
+  const loadCar = useCallback(async (carId) => {
     try {
       const network = StacksNetwork.createNetwork("mainnet")
       const result = await network.callReadOnlyFunction({
@@ -101,53 +70,95 @@ function App() {
       console.error(`Error loading car ${carId}:`, error)
       return null
     }
-  }
+  }, [userData])
+
+  const loadCars = useCallback(async () => {
+    try {
+      const network = StacksNetwork.createNetwork("mainnet")
+      const result = await network.callReadOnlyFunction({
+        contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
+        contractName: 'car-dealership',
+        functionName: 'get-total-cars',
+        functionArgs: [],
+        senderAddress: userData?.profile?.stxAddress?.mainnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
+      })
+
+      const total = parseInt(result.value)
+
+      const carPromises = []
+      for (let i = 0; i < total; i++) {
+        carPromises.push(loadCar(i))
+      }
+      const loadedCars = await Promise.all(carPromises)
+      setCars(loadedCars.filter(car => car !== null))
+    } catch (error) {
+      console.error('Error loading cars:', error)
+    }
+  }, [userData, loadCar])
+
+  useEffect(() => {
+    if (userData) {
+      loadCars()
+    }
+  }, [userData, loadCars])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-indigo-700">
-      <div className="container mx-auto px-4 py-8">
-        <Header 
-          userData={userData}
-          onConnect={connectWallet}
-          onDisconnect={disconnectWallet}
-        />
-        
+    <div className="flex flex-col min-h-screen selection:bg-brand-500 selection:text-white">
+      <Header
+        userData={userData}
+        onConnect={connectWallet}
+        onDisconnect={disconnectWallet}
+      />
+
+      <main className="flex-grow container mx-auto px-6 py-12 space-y-16">
         {userData && (
-          <>
-            <AddCar 
-              userData={userData}
+          <section className="space-y-8 animate-fade-in">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <AddCar
+                userSession={userSession}
+                onCarAdded={loadCars}
+              />
+              <TokenManager
+                userData={userData}
+                userSession={userSession}
+              />
+            </div>
+
+            <NFTManager
               userSession={userSession}
-              onCarAdded={loadCars}
             />
-            
-            <TokenManager 
-              userData={userData}
-              userSession={userSession}
-            />
-            
-            <NFTManager 
-              userData={userData}
-              userSession={userSession}
-            />
-          </>
+          </section>
         )}
 
-        <CarList 
-          cars={cars}
-          userData={userData}
-          userSession={userSession}
-          onUpdate={loadCars}
-        />
-
-        {userData && (
-          <div className="mt-8">
-            <NFTGallery 
-              userData={userData}
-              userSession={userSession}
-            />
+        <section>
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="text-3xl font-bold text-dark-900 dark:text-white">Showroom</h2>
+              <p className="text-gray-500 dark:text-gray-400 mt-2">Discover our collection of premium vehicles</p>
+            </div>
+            {/* Filter controls could go here */}
           </div>
+
+          <CarList
+            cars={cars}
+            userData={userData}
+            userSession={userSession}
+            onUpdate={loadCars}
+          />
+        </section>
+
+        {userData && (
+          <section className="pt-8 border-t border-gray-200 dark:border-gray-800">
+            <h2 className="text-3xl font-bold text-dark-900 dark:text-white mb-8">Your Digital Assets</h2>
+            <NFTGallery
+              userData={userData}
+              userSession={userSession}
+            />
+          </section>
         )}
-      </div>
+      </main>
+
+      <Footer />
     </div>
   )
 }
