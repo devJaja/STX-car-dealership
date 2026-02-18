@@ -1,20 +1,47 @@
 import useDarkMode from '../hooks/useDarkMode'
+import { Link, useLocation } from 'react-router-dom'
 
 function Header({ userData, onConnect, onDisconnect }) {
   const [isDark, setIsDark] = useDarkMode()
+  const location = useLocation()
+
+  const navLinks = [
+    { path: '/', label: 'Home' },
+    { path: '/marketplace', label: 'Marketplace' },
+    { path: '/manage', label: 'Manage' },
+    { path: '/gallery', label: 'Gallery' },
+  ]
 
   return (
     <header className="sticky top-0 z-50 transition-all duration-300">
       <div className="absolute inset-0 bg-white/80 dark:bg-dark-900/80 backdrop-blur-md shadow-glass border-b border-white/20 dark:border-gray-800 transition-colors duration-300"></div>
       <div className="container mx-auto px-6 relative">
         <div className="flex justify-between items-center h-20">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-brand-500 to-brand-700 rounded-xl flex items-center justify-center shadow-lg shadow-brand-500/20 text-white">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-            </div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-brand-600 to-brand-800 dark:from-brand-400 dark:to-brand-200 bg-clip-text text-transparent tracking-tight">
-              LuxeDrive
-            </h1>
+          <div className="flex items-center gap-8">
+            <Link to="/" className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-brand-500 to-brand-700 rounded-xl flex items-center justify-center shadow-lg shadow-brand-500/20 text-white">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+              </div>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-brand-600 to-brand-800 dark:from-brand-400 dark:to-brand-200 bg-clip-text text-transparent tracking-tight">
+                LuxeDrive
+              </h1>
+            </Link>
+
+            <nav className="hidden md:flex gap-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`text-sm font-medium transition-colors ${
+                    location.pathname === link.path
+                      ? 'text-brand-600 dark:text-brand-400'
+                      : 'text-gray-600 dark:text-gray-300 hover:text-brand-600 dark:hover:text-brand-400'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
           </div>
 
           <div className="flex items-center gap-4">
