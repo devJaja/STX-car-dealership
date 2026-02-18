@@ -3,6 +3,7 @@ import { AppConfig, UserSession, showConnect } from '@stacks/connect'
 import * as StacksNetwork from '@stacks/network'
 import { uintCV } from '@stacks/transactions'
 import Header from './components/Header'
+import Showroom from './components/Showroom'
 import AddCar from './components/AddCar'
 import CarList from './components/CarList'
 import TokenManager from './components/TokenManager'
@@ -113,6 +114,8 @@ function App() {
       />
 
       <main className="flex-grow container mx-auto px-6 py-12 space-y-16">
+        <Showroom />
+        
         {userData && (
           <section className="space-y-8 animate-fade-in">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
