@@ -19,6 +19,7 @@ function App() {
 
   useEffect(() => {
     if (userSession.isUserSignedIn()) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUserData(userSession.loadUserData())
     }
   }, [])
@@ -98,6 +99,7 @@ function App() {
 
   useEffect(() => {
     if (userData) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       loadCars()
     }
   }, [userData, loadCars])

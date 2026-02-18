@@ -61,7 +61,7 @@ function TokenManager({ userData, userSession }) {
             placeholder="Amount"
             value={mintAmount}
             onChange={(e) => setMintAmount(e.target.value)}
-            className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+            className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 dark:bg-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
             required
           />
         </div>
@@ -72,7 +72,7 @@ function TokenManager({ userData, userSession }) {
             placeholder="SP..."
             value={recipient}
             onChange={(e) => setRecipient(e.target.value)}
-            className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all font-mono text-sm"
+            className="w-full border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-2.5 bg-white dark:bg-gray-800 dark:bg-dark-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all font-mono text-sm"
             required
           />
         </div>
@@ -90,7 +90,7 @@ function TokenManager({ userData, userSession }) {
         <span className="text-sm text-gray-500 dark:text-gray-400">Your Usage</span>
         <div className="flex gap-4 items-center">
           {balance !== null && (
-            <span className="text-dark-900 dark:text-white font-bold bg-white dark:bg-dark-800 px-3 py-1 rounded-md shadow-sm border border-gray-100 dark:border-gray-700">
+            <span className="text-dark-900 dark:text-white font-bold bg-white dark:bg-gray-800 dark:bg-dark-800 px-3 py-1 rounded-md shadow-sm border border-gray-100 dark:border-gray-700">
               {balance} CDT
             </span>
           )}

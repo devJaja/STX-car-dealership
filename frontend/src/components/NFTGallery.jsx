@@ -72,6 +72,7 @@ function NFTGallery({ userData, userSession }) {
 
   useEffect(() => {
     if (userData) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       loadNFTs()
     }
   }, [userData, loadNFTs])
@@ -99,8 +100,8 @@ function NFTGallery({ userData, userSession }) {
   }
 
   return (
-    <div className="bg-white dark:bg-dark-800 rounded-lg shadow-lg p-6 border border-gray-100 dark:border-gray-700">
-      <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">🎨 NFT Gallery</h2>
+    <div className="bg-white dark:bg-gray-800 dark:bg-dark-800 rounded-lg shadow-lg p-6 border border-gray-100 dark:border-gray-700">
+      <h2 className="text-2xl font-bold text-gray-800 dark:text-white dark:text-white mb-6">🎨 NFT Gallery</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {nfts.length === 0 ? (
           <div className="col-span-full py-12 text-center text-gray-500">

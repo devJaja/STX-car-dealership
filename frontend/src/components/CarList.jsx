@@ -67,7 +67,7 @@ function CarList({ cars, userData, userSession, onUpdate }) {
         </div>
       ) : (
         cars.map((car) => (
-          <div key={car.id} className="bg-white dark:bg-dark-800 rounded-2xl shadow-xl overflow-hidden card-hover border border-gray-100 dark:border-gray-700 flex flex-col">
+          <div key={car.id} className="bg-white dark:bg-gray-800 dark:bg-dark-800 rounded-2xl shadow-xl overflow-hidden card-hover border border-gray-100 dark:border-gray-700 flex flex-col">
             <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 relative flex items-center justify-center">
               <span className="text-6xl filter drop-shadow-lg opacity-80">🚗</span>
               <div className="absolute top-4 right-4">
