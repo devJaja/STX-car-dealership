@@ -1,0 +1,23 @@
+{
+  "name": "car-dealership-dapp",
+  "version": "1.0.0",
+  "description": "Decentralized car dealership on Stacks blockchain",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devJaja/STX-car-dealership.git"
+  },
+  "keywords": [
+    "stacks",
+    "blockchain",
+    "clarity",
+    "dapp",
+    "nft",
+    "bitcoin"
+  ],
+  "author": "devJaja",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devJaja/STX-car-dealership/issues"
+  },
+  "homepage": "https://github.com/devJaja/STX-car-dealership#readme"
+}
