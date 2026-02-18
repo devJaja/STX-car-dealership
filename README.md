@@ -8,13 +8,18 @@ A decentralized car dealership application built on the Stacks blockchain using 
 car-dealership/
 ├── contracts/
 │   ├── car-dealership.clar    # Clarity smart contract
-│   └── Clarinet.toml           # Clarinet configuration
+│   ├── car-token.clar         # Fungible token (CDT)
+│   ├── car-nft.clar           # NFT contract
+│   └── Clarinet.toml          # Clarinet configuration
 └── frontend/
     ├── src/
     │   ├── components/
     │   │   ├── Header.jsx      # Header with wallet connection
     │   │   ├── AddCar.jsx      # Add car form
-    │   │   └── CarList.jsx     # Display and interact with cars
+    │   │   ├── CarList.jsx     # Display and interact with cars
+    │   │   ├── TokenManager.jsx # Token management
+    │   │   ├── NFTManager.jsx  # NFT minting
+    │   │   └── NFTGallery.jsx  # NFT display
     │   ├── App.jsx             # Main app component
     │   ├── main.jsx            # React entry point
     │   └── index.css           # Tailwind CSS
