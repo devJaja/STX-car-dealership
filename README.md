@@ -113,6 +113,18 @@ Open http://localhost:5173
 - **Frontend**: React 18 + Vite
 - **Styling**: Tailwind CSS
 - **Wallet Integration**: Stacks Connect (@stacks/connect)
+- **Testing**: Clarinet
+- **CI/CD**: GitHub Actions
+
+## Contract Addresses
+
+- **Dealership**: `SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC.car-dealership`
+- **Token (CDT)**: Deploy your own
+- **NFT**: Deploy your own
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details
 
 ## Contract Functions
 
