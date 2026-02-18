@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { AppConfig, UserSession, showConnect } from '@stacks/connect'
-import { StacksTestnet } from '@stacks/network'
+import * as StacksNetwork from '@stacks/network'
 import { callReadOnlyFunction, uintCV, stringAsciiCV } from '@stacks/transactions'
 import Header from './components/Header'
 import AddCar from './components/AddCar'
@@ -50,7 +50,7 @@ function App() {
 
   const loadCars = async () => {
     try {
-      const network = new StacksTestnet()
+      const network = new StacksNetwork.StacksTestnet()
       const result = await callReadOnlyFunction({
         network,
         contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
@@ -76,7 +76,7 @@ function App() {
 
   const loadCar = async (carId) => {
     try {
-      const network = new StacksTestnet()
+      const network = new StacksNetwork.StacksTestnet()
       const result = await callReadOnlyFunction({
         network,
         contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',

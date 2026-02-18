@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { openContractCall } from '@stacks/connect'
-import { StacksTestnet } from '@stacks/network'
+import * as StacksNetwork from '@stacks/network'
 import { stringAsciiCV, uintCV } from '@stacks/transactions'
 
 function AddCar({ userData, userSession, onCarAdded }) {
@@ -13,7 +13,7 @@ function AddCar({ userData, userSession, onCarAdded }) {
     e.preventDefault()
 
     await openContractCall({
-      network: new StacksTestnet(),
+      network: new StacksNetwork.StacksTestnet(),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-dealership',
       functionName: 'add-car',

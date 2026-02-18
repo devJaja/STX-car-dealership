@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { callReadOnlyFunction, uintCV, principalCV } from '@stacks/transactions'
-import { StacksTestnet } from '@stacks/network'
+import * as StacksNetwork from '@stacks/network'
 import { openContractCall } from '@stacks/connect'
 
 function NFTGallery({ userData, userSession }) {
@@ -15,7 +15,7 @@ function NFTGallery({ userData, userSession }) {
 
   const loadNFTs = async () => {
     try {
-      const network = new StacksTestnet()
+      const network = new StacksNetwork.StacksTestnet()
       const result = await callReadOnlyFunction({
         network,
         contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
@@ -41,7 +41,7 @@ function NFTGallery({ userData, userSession }) {
 
   const loadNFT = async (tokenId) => {
     try {
-      const network = new StacksTestnet()
+      const network = new StacksNetwork.StacksTestnet()
       const metadata = await callReadOnlyFunction({
         network,
         contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
@@ -86,7 +86,7 @@ function NFTGallery({ userData, userSession }) {
     if (!recipient) return
 
     await openContractCall({
-      network: new StacksTestnet(),
+      network: new StacksNetwork.StacksTestnet(),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-nft',
       functionName: 'transfer',

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { openContractCall } from '@stacks/connect'
-import { StacksTestnet } from '@stacks/network'
+import * as StacksNetwork from '@stacks/network'
 import { uintCV, principalCV, stringAsciiCV } from '@stacks/transactions'
 
 function NFTManager({ userData, userSession }) {
@@ -20,7 +20,7 @@ function NFTManager({ userData, userSession }) {
   const mintNFT = async (e) => {
     e.preventDefault()
     await openContractCall({
-      network: new StacksTestnet(),
+      network: new StacksNetwork.StacksTestnet(),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-nft',
       functionName: 'mint',

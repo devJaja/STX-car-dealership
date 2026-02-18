@@ -1,11 +1,11 @@
 import { openContractCall } from '@stacks/connect'
-import { StacksTestnet } from '@stacks/network'
+import * as StacksNetwork from '@stacks/network'
 import { uintCV } from '@stacks/transactions'
 
 function CarList({ cars, userData, userSession, onUpdate }) {
   const buyCar = async (carId) => {
     await openContractCall({
-      network: new StacksTestnet(),
+      network: new StacksNetwork.StacksTestnet(),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-dealership',
       functionName: 'buy-car',
@@ -23,7 +23,7 @@ function CarList({ cars, userData, userSession, onUpdate }) {
     if (!newPrice) return
 
     await openContractCall({
-      network: new StacksTestnet(),
+      network: new StacksNetwork.StacksTestnet(),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-dealership',
       functionName: 'list-car',
@@ -38,7 +38,7 @@ function CarList({ cars, userData, userSession, onUpdate }) {
 
   const unlistCar = async (carId) => {
     await openContractCall({
-      network: new StacksTestnet(),
+      network: new StacksNetwork.StacksTestnet(),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-dealership',
       functionName: 'unlist-car',
