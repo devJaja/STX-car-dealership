@@ -11,7 +11,7 @@ function TokenManager({ userData, userSession }) {
   const mintTokens = async (e) => {
     e.preventDefault()
     await openContractCall({
-      network: new StacksNetwork.StacksTestnet(),
+      network: new StacksNetwork.StacksMainnet(),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-token',
       functionName: 'mint',
@@ -27,13 +27,13 @@ function TokenManager({ userData, userSession }) {
 
   const checkBalance = async () => {
     const response = await fetch(
-      `https://api.testnet.hiro.so/v2/contracts/call-read/SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC/car-token/get-balance`,
+      `https://api.mainnet.hiro.so/v2/contracts/call-read/SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC/car-token/get-balance`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          sender: userData.profile.stxAddress.testnet,
-          arguments: [`0x${Buffer.from(userData.profile.stxAddress.testnet).toString('hex')}`],
+          sender: userData.profile.stxAddress.mainnet,
+          arguments: [`0x${Buffer.from(userData.profile.stxAddress.mainnet).toString('hex')}`],
         }),
       }
     )

@@ -15,14 +15,14 @@ function NFTGallery({ userData, userSession }) {
 
   const loadNFTs = async () => {
     try {
-      const network = new StacksNetwork.StacksTestnet()
+      const network = new StacksNetwork.StacksMainnet()
       const result = await callReadOnlyFunction({
         network,
         contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
         contractName: 'car-nft',
         functionName: 'get-last-token-id',
         functionArgs: [],
-        senderAddress: userData?.profile?.stxAddress?.testnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
+        senderAddress: userData?.profile?.stxAddress?.mainnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       })
 
       const total = parseInt(result.value)
@@ -41,14 +41,14 @@ function NFTGallery({ userData, userSession }) {
 
   const loadNFT = async (tokenId) => {
     try {
-      const network = new StacksNetwork.StacksTestnet()
+      const network = new StacksNetwork.StacksMainnet()
       const metadata = await callReadOnlyFunction({
         network,
         contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
         contractName: 'car-nft',
         functionName: 'get-metadata',
         functionArgs: [uintCV(tokenId)],
-        senderAddress: userData?.profile?.stxAddress?.testnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
+        senderAddress: userData?.profile?.stxAddress?.mainnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       })
 
       const owner = await callReadOnlyFunction({
@@ -57,7 +57,7 @@ function NFTGallery({ userData, userSession }) {
         contractName: 'car-nft',
         functionName: 'get-owner',
         functionArgs: [uintCV(tokenId)],
-        senderAddress: userData?.profile?.stxAddress?.testnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
+        senderAddress: userData?.profile?.stxAddress?.mainnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       })
 
       if (metadata.type === 'ok' && metadata.value.type === 'some') {
@@ -86,13 +86,13 @@ function NFTGallery({ userData, userSession }) {
     if (!recipient) return
 
     await openContractCall({
-      network: new StacksNetwork.StacksTestnet(),
+      network: new StacksNetwork.StacksMainnet(),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-nft',
       functionName: 'transfer',
       functionArgs: [
         uintCV(tokenId),
-        principalCV(userData.profile.stxAddress.testnet),
+        principalCV(userData.profile.stxAddress.mainnet),
         principalCV(recipient)
       ],
       onFinish: (data) => {
@@ -125,7 +125,7 @@ function NFTGallery({ userData, userSession }) {
                 Owner: {nft.owner?.slice(0, 8)}...
               </p>
 
-              {userData && nft.owner === userData.profile.stxAddress.testnet && (
+              {userData && nft.owner === userData.profile.stxAddress.mainnet && (
                 <button
                   onClick={() => transferNFT(nft.id)}
                   className="w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"

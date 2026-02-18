@@ -5,7 +5,7 @@ import { uintCV } from '@stacks/transactions'
 function CarList({ cars, userData, userSession, onUpdate }) {
   const buyCar = async (carId) => {
     await openContractCall({
-      network: new StacksNetwork.StacksTestnet(),
+      network: new StacksNetwork.StacksMainnet(),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-dealership',
       functionName: 'buy-car',
@@ -23,7 +23,7 @@ function CarList({ cars, userData, userSession, onUpdate }) {
     if (!newPrice) return
 
     await openContractCall({
-      network: new StacksNetwork.StacksTestnet(),
+      network: new StacksNetwork.StacksMainnet(),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-dealership',
       functionName: 'list-car',
@@ -38,7 +38,7 @@ function CarList({ cars, userData, userSession, onUpdate }) {
 
   const unlistCar = async (carId) => {
     await openContractCall({
-      network: new StacksNetwork.StacksTestnet(),
+      network: new StacksNetwork.StacksMainnet(),
       contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       contractName: 'car-dealership',
       functionName: 'unlist-car',
@@ -52,7 +52,7 @@ function CarList({ cars, userData, userSession, onUpdate }) {
   }
 
   const isOwner = (car) => {
-    return userData && car.owner === userData.profile.stxAddress.testnet
+    return userData && car.owner === userData.profile.stxAddress.mainnet
   }
 
   return (

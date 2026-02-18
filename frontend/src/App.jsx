@@ -50,14 +50,14 @@ function App() {
 
   const loadCars = async () => {
     try {
-      const network = new StacksNetwork.StacksTestnet()
+      const network = new StacksNetwork.StacksMainnet()
       const result = await callReadOnlyFunction({
         network,
         contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
         contractName: 'car-dealership',
         functionName: 'get-total-cars',
         functionArgs: [],
-        senderAddress: userData?.profile?.stxAddress?.testnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
+        senderAddress: userData?.profile?.stxAddress?.mainnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       })
       
       const total = parseInt(result.value)
@@ -76,14 +76,14 @@ function App() {
 
   const loadCar = async (carId) => {
     try {
-      const network = new StacksNetwork.StacksTestnet()
+      const network = new StacksNetwork.StacksMainnet()
       const result = await callReadOnlyFunction({
         network,
         contractAddress: 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
         contractName: 'car-dealership',
         functionName: 'get-car',
         functionArgs: [uintCV(carId)],
-        senderAddress: userData?.profile?.stxAddress?.testnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
+        senderAddress: userData?.profile?.stxAddress?.mainnet || 'SP19PS42C7R7BR4VCX2YN8KPHXSB0ZC19K6PFEKTC',
       })
 
       if (result.type === 'some') {

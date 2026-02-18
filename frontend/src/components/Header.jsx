@@ -7,7 +7,7 @@ function Header({ userData, onConnect, onDisconnect }) {
           {userData ? (
             <>
               <span className="text-sm text-gray-600">
-                {userData.profile.stxAddress.testnet.slice(0, 8)}...
+                {userData.profile.stxAddress.mainnet.slice(0, 8)}...
               </span>
               <button
                 onClick={onDisconnect}
