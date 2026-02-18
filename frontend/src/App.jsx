@@ -7,6 +7,7 @@ import AddCar from './components/AddCar'
 import CarList from './components/CarList'
 import TokenManager from './components/TokenManager'
 import NFTManager from './components/NFTManager'
+import NFTGallery from './components/NFTGallery'
 
 const appConfig = new AppConfig(['store_write', 'publish_data'])
 const userSession = new UserSession({ appConfig })
@@ -139,6 +140,15 @@ function App() {
           userSession={userSession}
           onUpdate={loadCars}
         />
+
+        {userData && (
+          <div className="mt-8">
+            <NFTGallery 
+              userData={userData}
+              userSession={userSession}
+            />
+          </div>
+        )}
       </div>
     </div>
   )
