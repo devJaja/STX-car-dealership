@@ -128,7 +128,18 @@ Open http://localhost:5173
 
 ## Additional Contracts
 
-- **Car Token (CDT)**: Fungible token for the ecosystem
-- **Car NFT**: Non-fungible tokens representing car ownership
+- **Car Token (CDT)**: Fungible token for the ecosystem - [Details](TOKEN_NFT.md)
+- **Car NFT**: Non-fungible tokens representing car ownership - [Details](TOKEN_NFT.md)
 
-See [TOKEN_NFT.md](TOKEN_NFT.md) for details.
+## Documentation
+
+- [API Reference](API.md) - Complete contract API documentation
+- [Architecture](ARCHITECTURE.md) - System design and data flow
+- [Testing Guide](TESTING.md) - How to run and write tests
+- [Deployment Guide](DEPLOYMENT.md) - Mainnet deployment instructions
+- [Frontend Guide](FRONTEND.md) - Frontend integration details
+- [Performance](PERFORMANCE.md) - Optimization best practices
+- [Security Policy](SECURITY.md) - Security guidelines
+- [Contributing](CONTRIBUTING.md) - How to contribute
+- [Troubleshooting](TROUBLESHOOTING.md) - Common issues and fixes
+- [Changelog](CHANGELOG.md) - Version history
