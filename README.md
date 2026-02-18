@@ -1,5 +1,9 @@
 # Car Dealership dApp
 
+[![Tests](https://github.com/devJaja/STX-car-dealership/actions/workflows/test.yml/badge.svg)](https://github.com/devJaja/STX-car-dealership/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Stacks](https://img.shields.io/badge/Stacks-Mainnet-5546FF)](https://www.stacks.co/)
+
 A decentralized car dealership application built on the Stacks blockchain using Clarity smart contracts and React.
 
 ## Project Structure
